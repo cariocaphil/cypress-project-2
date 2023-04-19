@@ -10,4 +10,14 @@ describe('contact form', () => {
       cy.get('@submitBtn').contains('Sending...');
       cy.get('@submitBtn').should('have.attr', 'disabled');
     })
+
+    it('should validate form input', () => {
+      cy.visit('http://localhost:5173/about')
+      cy.get('[data-cy="contact-btn-submit"]').click();
+      cy.get('[data-cy="contact-btn-submit"]').then(el => {
+        expect(el).not.to.have.attr('disabled');
+        expect(el.text()).to.not.equal('Sending');
+      })
+      cy.get('[data-cy="contact-btn-submit"]').contains('Send Message');
+    })
   })
