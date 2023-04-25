@@ -4,6 +4,7 @@ describe('contact form', () => {
       cy.get('[data-cy="contact-input-message"]').type('Hello World');
       cy.get('[data-cy="contact-input-name"]').type('John Doe');
       cy.get('[data-cy="contact-input-email"]').type('test@example.com{enter}');
+      cy.screenshot();
       cy.get('[data-cy="contact-btn-submit"]').contains('Send Message').should('not.have.attr', 'disabled');
       cy.get('[data-cy="contact-btn-submit"]').as('submitBtn');
       cy.get('@submitBtn').click();
@@ -19,7 +20,6 @@ describe('contact form', () => {
         expect(el.text()).to.not.equal('Sending');
       })
       cy.get('[data-cy="contact-btn-submit"]').contains('Send Message');
-
       cy.get('[data-cy="contact-input-message"]').as('msgInput')
       cy.get('@msgInput').click();
       cy.get('@msgInput').blur();
@@ -33,7 +33,7 @@ describe('contact form', () => {
       cy.get('@nameInput')
       .parent()
       .should('have.attr', 'class').and('match', /invalid/);
-      
+
       cy.get('[data-cy="contact-input-email"]').as('emailInput');
       cy.get('@emailInput').click();
       cy.get('@emailInput').blur();
