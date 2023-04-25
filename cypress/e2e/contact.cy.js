@@ -24,25 +24,21 @@ describe('contact form', () => {
       cy.get('@msgInput').click();
       cy.get('@msgInput').blur();
       cy.get('@msgInput')
-      .parent((el) => {
-        expect(el.attr('class')).to.contains('invalid')
-      });
+      .parent()
+      .should('have.attr', 'class').and('match', /invalid/);
 
       cy.get('[data-cy="contact-input-name"]').as('nameInput');
       cy.get('@nameInput').click();
       cy.get('@nameInput').blur();
       cy.get('@nameInput')
       .parent()
-      .then((el) => {
-        expect(el.attr('class')).to.contains('invalid');
-      })
+      .should('have.attr', 'class').and('match', /invalid/);
+      
       cy.get('[data-cy="contact-input-email"]').as('emailInput');
       cy.get('@emailInput').click();
       cy.get('@emailInput').blur();
       cy.get('@emailInput')
       .parent()
-      .then((el) => {
-        expect(el.attr('class')).to.contains('invalid');
-      })
+      .should('have.attr', 'class').and('match', /invalid/);
     })
   })
