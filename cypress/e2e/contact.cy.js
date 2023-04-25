@@ -20,24 +20,26 @@ describe('contact form', () => {
       })
       cy.get('[data-cy="contact-btn-submit"]').contains('Send Message');
 
-      cy.get('[data-cy="contact-input-message"]').click();
-      cy.get('[data-cy="contact-input-message"]').blur();
-      cy.get('[data-cy="contact-input-message"]')
+      cy.get('[data-cy="contact-input-message"]').as('msgInput')
+      cy.get('@msgInput').click();
+      cy.get('@msgInput').blur();
+      cy.get('@msgInput')
       .parent((el) => {
         expect(el.attr('class')).to.contains('invalid')
       });
 
-      cy.get('[data-cy="contact-input-name"]').click();
-      cy.get('[data-cy="contact-input-name"]').blur();
-      cy.get('[data-cy="contact-input-name"]')
+      cy.get('[data-cy="contact-input-name"]').as('nameInput');
+      cy.get('@nameInput').click();
+      cy.get('@nameInput').blur();
+      cy.get('@nameInput')
       .parent()
       .then((el) => {
         expect(el.attr('class')).to.contains('invalid');
       })
-      
-      cy.get('[data-cy="contact-input-email"]').click();
-      cy.get('[data-cy="contact-input-email"]').blur();
-      cy.get('[data-cy="contact-input-email"]')
+      cy.get('[data-cy="contact-input-email"]').as('emailInput');
+      cy.get('@emailInput').click();
+      cy.get('@emailInput').blur();
+      cy.get('@emailInput')
       .parent()
       .then((el) => {
         expect(el.attr('class')).to.contains('invalid');
